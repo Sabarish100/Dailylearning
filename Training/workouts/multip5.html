@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>
+            Multiple of x
+        </title>
+    </head>
+    <body>
+        <div>
+            <label for ="m"> Enter number to find the multiple of </label>
+            <input type="number" id="m">
+            <button onclick="f1()">Click Me</button>
+            <p>Multiple of the number is</p>
+            <span id ="multi"></span>
+        </div>
+    </body>
+    <script>
+        function f1(){
+            let x= document.getElementById("multi");
+            let y= document.getElementById("m");
+            x.innerHTML= y.value;
+        }
+    </script>
+</html>

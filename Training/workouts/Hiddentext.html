@@ -1,0 +1,21 @@
+
+<html>
+<head>
+  <title>Show Text on Button Click</title>
+  <script>
+    function showText() {
+      var text = document.getElementById("hiddenText");
+      text.style.display = "block"; // Show the text
+    }
+  </script>
+</head>
+<body>
+
+  <button onclick="showText()">Click Me</button>
+
+  <div id="hiddenText" style="display:none;">
+    <p>This text will appear after the button is clicked.</p>
+  </div>
+
+</body>
+</html>
