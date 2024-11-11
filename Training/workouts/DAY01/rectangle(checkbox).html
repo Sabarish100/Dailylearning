@@ -1,0 +1,58 @@
+<head>  
+    <title>Rectangle</title>  
+</head>  
+<body>  
+    <label for="length">Enter the length:</label>  
+    <input type="number" id="length" min="0" step="1">  
+    
+    <label for="breadth">Enter the breadth:</label>  
+    <input type="number" id="breadth" min="0" step="1"><br><br>  
+
+    <!-- Checkboxes to select area or perimeter -->
+    <label>
+        <input type="checkbox" id="perimeterCheckbox" onclick="displayResult()" > Perimeter
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="areaCheckbox" onclick="displayResult()"> Area
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="bothCheckbox" onclick="displayResult()"> Both
+    </label><br><br>
+
+    <p id="result"></p>
+</body>
+
+<script>  
+    // Function to calculate and display the result based on selected checkboxes
+    function displayResult() {
+        let length = document.getElementById("length").value;
+        let breadth = document.getElementById("breadth").value;
+
+        // Initialize the result message
+        let resultMessage = "";
+        
+        // Check if the Perimeter checkbox is checked
+        if (document.getElementById("perimeterCheckbox").checked) {
+            let perimeterValue = 2 * (parseInt(length) + parseInt(breadth));
+            resultMessage += "Perimeter: " + perimeterValue + "<br>";
+        }
+        
+        // Check if the Area checkbox is checked
+        if (document.getElementById("areaCheckbox").checked) {
+            let areaValue = parseFloat(length) * parseFloat(breadth);
+            resultMessage += "Area: " + areaValue + "<br>";
+        }
+
+        // Check if the Both checkbox is checked
+        if (document.getElementById("bothCheckbox").checked) {
+            let perimeterValue = 2 * (parseFloat(length) + parseFloat(breadth));
+            let areaValue = parseFloat(length) * parseFloat(breadth);
+            resultMessage += "Perimeter: " + perimeterValue + "<br>Area: " + areaValue + "<br>";
+        }
+        
+        // Display the result
+        document.getElementById("result").innerHTML = resultMessage ? resultMessage : "Please select an option!";
+    }
+</script>

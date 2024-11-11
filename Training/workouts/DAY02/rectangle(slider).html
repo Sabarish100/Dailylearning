@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rectangle</title>
+</head>
+<body>
+    <label for="length">Enter the length:</label>
+    <input type="range" id="length" min="0" max="" oninput="updateLengthValue(this.value)">
+    <span id="lengthValue"></span> <!-- Display length value -->
+    
+    <label for="breadth">Enter the breadth:</label>
+    <input type="range" id="breadth" min="0" max="" oninput="updateBreadthValue(this.value)">
+    <span id="breadthValue"></span> <!-- Display breadth value --><br>
+    
+    <button onclick="perimeter()">Perimeter</button>
+    <button onclick="area()">Area</button>
+    <button onclick="both()">Both</button>
+    
+    <p id="result"></p>
+</body>
+
+<script>
+    // Function to display length entered dynamically
+    function updateLengthValue(value) {
+        document.getElementById("lengthValue").textContent = value;
+    }
+    
+    // Function to display breadth entered dynamically
+    function updateBreadthValue(value) {
+        document.getElementById("breadthValue").textContent = value;
+    }
+    
+    // Function to calculate the perimeter
+    function perimeter() {
+        let length = document.getElementById("length").value;
+        let breadth = document.getElementById("breadth").value;
+        let perimeterValue = 2 * (parseFloat(length) + parseFloat(breadth));
+        document.getElementById("result").innerText = "Perimeter: " + perimeterValue;
+    }
+
+    // Function to calculate the area
+    function area() {
+        let length = document.getElementById("length").value;
+        let breadth = document.getElementById("breadth").value;
+        let areaValue = parseInt(length) * parseInt(breadth);
+        document.getElementById("result").innerText = "Area: " + areaValue;
+    }
+
+    // Function to calculate both perimeter and area
+    function both() {
+        let length = document.getElementById("length").value;
+        let breadth = document.getElementById("breadth").value;
+        let perimeterValue = 2 * (parseFloat(length) + parseFloat(breadth));
+        let areaValue = parseFloat(length) * parseFloat(breadth);
+        document.getElementById("result").innerText = "Perimeter: " + perimeterValue + ", Area: " + areaValue;
+    }
+</script>
+</html>

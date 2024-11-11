@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown_POC</title>
+    <script>
+        function multipleSelection() {
+
+
+        }
+        function checkZero(){
+           
+            if(document.getElementById("multipleInput").value == 0){
+
+                document.getElementById("btn").disabled= true;
+                document.getElementById("abc").disabled= true;
+            }
+            else{
+                document.getElementById("btn").disabled= false;
+                document.getElementById("abc").disabled= false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <div>
+            <label for="multipleInput">Number of multiples:</label>
+            <input type="number" id="multipleInput" min="0" max="5" step="1" placeholder="Enter" onchange="checkZero()">
+        </div>
+
+        <div>
+            <label for="abc">Choose a number:</label>
+            <select id="abc">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+
+        <button id="btn" type="submit" onclick="multipleSelection()">Submit</button>
+    </form>
+
+    <p id="result"></p> <!-- This paragraph displays the result -->
+</body>
+</html>

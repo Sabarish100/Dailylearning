@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Multiples of a number</title>
+    </head>
+    <body>
+        <label for="number">Enter the number:</label>
+        <input type="number" id="number" min="0" step="1">
+        <button onclick="Multiples()">Find answer</button>
+        <p id="answer">The multiples are:</p>
+    </body>
+    <script>
+        function Multiples() {
+            let x = document.getElementById("number");
+            let y = document.getElementById("answer");
+            let num = parseInt(x.value); 
+
+            if (num == 0) {
+                console.log("Enter a value greater than 0");
+                y.innerHTML = "Enter a value greater than 0";
+            } else {
+                let arr = [];
+                for (let i = 1; i <= 5; i++) {
+                    arr.push(num * i);
+                }
+                y.innerHTML = "The multiples are: " + arr.join(", ");
+            }
+        }
+    </script>
+</html>

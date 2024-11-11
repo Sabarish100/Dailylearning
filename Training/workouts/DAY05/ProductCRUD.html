@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>MAP</title>
+    </head>
+    <script>
+        //List of Products.
+        const Products = [
+            {productId:1,Name:'p1',Price:200},
+            {productId:2,Name:'p2',Price:50},
+            {productId:3,Name:'p3',Price:20},
+        ]
+        //Adding a product to the array by checking its existance. If it already exists, the array doesn't change otherwise it is added in the array.
+        function addProduct(productToBeAdded){
+            if(!Products.find(p=> (p.productId==productToBeAdded.productId))){
+                Products.push(productToBeAdded);
+                return true;
+            }
+            return false;
+        }
+
+        
+        console.log(addProduct({productId:4,Name:'p4',Price:30}));
+        console.log(addProduct({productId:2,Name:'paaa',Price:300}));
+        console.log(Products);
+        
+        
+
+
+        //Checking if the product is already present.
+        // function productAvailability(){
+        //     const product1 = {...Products};
+        //     const productAvailability = Products.find(x => x === Products.Name) !== undefined; // true
+        //     return true;
+        // }
+
+
+        // Apply Discount.
+        // const productDiscount =Products;
+        // const discount = Products.map((Price) => Price * 0.2);
+        // console.log(discount);
+    </script>
+</html>
