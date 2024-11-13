@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>
+            Assessment
+        </title>
+    </head>
+    <body>
+        <h1>Products Inventory</h1>
+            <h2>Search Products</h2>
+            <label for="criteria">Criteria</label>
+            <input type="text" id="criteria" > <br><!-- use of dis -->
+
+            <label for="category">Category</label>
+            <input type="radio" name="criteria" id="category">
+            
+            <label for="name">Name</label>
+            <input type="radio" name="criteria" id="name">
+
+            <label for="price">Price</label>
+            <input type="radio" name="criteria" id="price">
+
+            <label for="qty">Quantity</label>
+            <input type="radio" name="criteria" id="qty"><br><br>
+
+            <button id="search">Search</button>
+
+            <h2>Sort Products</h2>
+    
+            <select id="type"title ="dropdown" >
+                <option>Select a type</option>
+                <option value="price1">Price</option>
+                <option value="quantity">Quantity</option>
+                <option value="dateAdded">Dateadded</option>
+            </select>
+            <button id="sort">Sort</button>
+        <ul id="result"></ul>
+        
+    </body>
+    <script src="ASSIGNMENT.js"></script>
+</html>
