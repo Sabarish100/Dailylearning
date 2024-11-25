@@ -1,0 +1,31 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>oddPoc</title>
+</head>
+<body>
+    <p>check console</p>
+</body>
+<script>
+class TellMe{
+    constructor(maybe)
+    {
+        this.numbers=maybe;
+    }
+    getFirstNumber()
+    {
+        return this.numbers[0];
+    }
+    getNumberofOddNumbers(){
+        return this.numbers.filter(e => e % 2 !== 0);
+        }
+    };
+let y=[1,3,5,8,9,11];
+const z = new TellMe(y);
+const oddNumbers = new TellMe(y);
+
+console.log(z.getFirstNumber());
+console.log(oddNumbers.getNumberofOddNumbers());
+
+</script>
+</html> 

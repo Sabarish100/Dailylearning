@@ -1,0 +1,75 @@
+<html>
+<script>
+
+class Task {
+    constructor(taskid, taskname, taskstatus) {
+        this.taskid = taskid;
+        this.taskname = taskname;
+        this.taskstatus = taskstatus;
+    }
+}
+
+class TaskLogic {
+    constructor() {
+        this.tasks = [];
+    }
+
+    addTask(newTask) {
+        // Check if taskid already exists in the tasks array
+        const exists = this.tasks.some(task => task.taskid === newTask.taskid);
+        if (exists) {
+            return "not added";
+        } else {
+            this.tasks.push(newTask);
+            return "added";
+        }
+    }
+
+    getTasksBasedOnStatus(statusgiven) {
+        // Filter tasks based on the status
+        return this.tasks.filter(task => task.taskstatus === statusgiven);
+    }
+
+    updateTask(updatedtask){
+        const taskToBeEdited = this.tasks.find(task => task.taskid === updatedtask.taskid);
+        // If task is found, update its taskname and status
+        if (taskToBeEdited) {
+            this.tasks.taskToBeEdited.taskname = updatedtask.taskname;
+            this.tasks.taskToBeEdited.taskstatus = updatedtask.taskstatus;
+            return "Added";
+            } 
+            else {
+                    return "Not Found";
+                }
+        }
+        }
+    getAllTask(){
+        return this.tasks;
+    }
+
+
+
+const taskLogic = new TaskLogic();
+const task1 = new Task(1, "Task 1", "Pending");
+const task2 = new Task(2, "Task 2", "Completed");
+const task3 = new Task(3, "Task 3", "Pending");
+const task4 = new Task(4, "Task 4", "Pending");
+
+console.log(taskLogic.addTask(task1)); // Output: "added"
+console.log(taskLogic.addTask(task2)); // Output: "added"
+console.log(taskLogic.addTask(task3)); // Output: "added"
+console.log(taskLogic.addTask(task4)); // Output: "added"
+
+console.log(taskLogic.addTask(task1)); // Output: "not added"
+
+console.log(taskLogic.getTasksBasedOnStatus("Pending")); // Output: array which satisfies the condition
+
+console.log(taskLogic.getAllTask()); // Output: array
+
+
+const utask = new Task(1, "Task 1 Updated", "Completed");
+console.log(taskLogic.updateTask(utask));
+console.log(taskLogic.getAllTask());
+
+</script>
+</html>

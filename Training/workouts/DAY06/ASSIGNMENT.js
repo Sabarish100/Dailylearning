@@ -16,7 +16,7 @@ const products = [
   // console.log('Sorted by Price (Ascending):', sortedByPrice);
   return sortedByPrice;
   }
-  sortElementsByPrice();//Should be called when it is clicked in the page.
+  // sortElementsByPrice();//Should be called when it is clicked in the page.
   
   // 2. Sorting by Quantity (descending)
   function sortElementsByQuantity(){
@@ -24,7 +24,7 @@ const products = [
   // console.log('Sorted by Quantity (Descending):', sortedByQuantity);
   return sortedByQuantity;
   }
-  sortElementsByQuantity();//Should be called when it is clicked in the page.
+  // sortElementsByQuantity();//Should be called when it is clicked in the page.
   
   // 3. Sorting by Date Added (ascending)
   function sortElementByDateAdded(){
@@ -32,7 +32,7 @@ const products = [
   // console.log('Sorted by Date Added (Ascending):', sortedByDateAdded);
   return sortedByDateAdded;
   }
-  sortElementByDateAdded();//Should be called when it is clicked in the page.
+  // sortElementByDateAdded();//Should be called when it is clicked in the page.
   
   // 4. Search: Find all products in a specific category (e.g., 'Tools')
   function categoryTools(category){

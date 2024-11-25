@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Font for the body */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            background-color: #f9f9f9; /* Light background color */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Column direction */
+            height: 100vh; /* Full viewport height */
+        }
+
+        header {
+            background-color: gray; /* Dark background */
+            color: white; /* White text */
+            text-align: center; /* Center text */
+            padding: 20px; /* Padding for header */
+        }
+
+        .content {
+            flex: 1; /* Allow content to grow and fill available space */
+            display: flex; /* Use flexbox for layout */
+            flex-direction: column; /* Column direction */
+            padding: 20px; /* Padding around the content */
+        }
+
+        .welcome {
+            margin-bottom: 20px; /* Margin below welcome message */
+            font-size: 20px; /* Font size for welcome message */
+            color: #2c3e50; /* Dark text color */
+        }
+
+        
+        footer {
+            text-align: center; /* Center text */
+            padding: 15px; /* Padding for footer */
+            background-color: gray; /* Dark background */
+            color: white; /* White text */
+            position: relative; /* Position footer */
+            
+        }
+        .calcbtn { width: auto; margin: 75px auto; border: 1px solid #ccc; background-color: #EA4C89; border-radius: 8px; box-sizing: border-box; display: inline-block; font-family: "Arial, sans-serif"; font-size: 14px; font-weight: 500;  height: 40px; line-height: 20px; padding: 10px 16px; position: relative; text-align: center; transition: color 100ms; vertical-align: baseline; touch-action: manipulation;}
+
+.calcbtn:hover,
+.calcbtn:focus {
+  background-color: #F082AC;
+}
+        .container { position: relative; top: -90px; left: 70px;;   width:auto; margin: 75px auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        input[type="number"], button { width: 95%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .addbtn { background-color: gray; color: white; border: none; }
+        .addbtn:hover { background-color: palegreen; }
+        .error { color: red; }
+    </style>
+    <script>
+
+        function addNumbers() {
+            const num1 = parseFloat(document.getElementById("num1").value);
+            const num2 = parseFloat(document.getElementById("num2").value);
+            const resultElement = document.getElementById("result");
+
+            if (isNaN(num1) || isNaN(num2)) {
+                resultElement.innerText = "Please enter valid numbers.";
+            } else {
+                const sum = num1 + num2;
+                resultElement.innerText = "Result: " + sum;
+            }
+        }
+        function logout() {
+            window.location.href = "logout.html"; // Redirect to logout page
+        }
+        window.onload = function() {
+            if (!sessionStorage.getItem("loggedIn")) {
+                window.location.href = "login.html"; // Redirect if not logged in
+            }
+        };
+        
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Manufacturing Company Dashboard</h1>
+    </header>
+
+    <div class="content">
+        <div class="welcome">
+            Welcome, User! 
+            <span class="logout-link" onclick="logout()">Logout</span>
+        </div>
+        <button class="calcbtn"><a href="add.html" style="text-decoration: none;">Addition calculator</a></button>
+    </div>
+    <div class="container">
+        <h2>Add Two Numbers</h2>
+        <p id="loginError" class="error"></p>
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+        <button class="addbtn" onclick="addNumbers()">Add</button>
+        <p id="result"></p>
+    </div>
+    <footer>
+        © 2024 Manufacturing Company. All rights reserved.
+    </footer>
+</body>
+</html>

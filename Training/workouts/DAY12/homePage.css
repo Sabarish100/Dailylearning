@@ -1,0 +1,36 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #526E48; 
+}
+
+/* Header Styles */
+.header {
+    /* resize: both;
+    overflow: hidden; */
+    display: flex;              
+    justify-content: center; 
+    align-items: center;        
+    background-color: #C2FFC7;     
+    color:#1F4529;               
+    padding: 20px;  
+}
+
+.nav {
+    display: flex;              /* Use flexbox for alignment */
+    flex-direction: row;        /* Stack items horizontally */
+    justify-content: center;    /* Center items vertically */
+    align-items: center;        /* Center items horizontally */
+    height: 100vh;              /* Optional: Set height to view full vertical center */
+    text-align: center;         /* Align text to center */
+    
+}
+
+.nav div {
+    box-shadow: 8px 7px 2px 1px #C2FFC7;
+    margin: 1px auto;             /* Add spacing between elements */
+    border: 1px solid #000000;
+    padding: 1rem;
+}
