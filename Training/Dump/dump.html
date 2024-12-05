@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal</title>
+    <link rel="stylesheet" href="postLogin.css">
+</head>
+<body>  
+    <header>
+        <div class="header-content">
+            <h1>Employee Portal</h1>
+        </div>
+        <button type="button" id="button">Logout</button>
+    </header>
+<main>
+    <p>Welcome,<span id="username"></span></p>
+    <div class="form-container">
+        <h3>Employee Information</h3>
+        <form action="#" method="get">
+            <div class="form-group">
+                <label for="emp-id">Employee ID:</label>
+                <input type="text" id="emp-id" name="emp-id" required>
+            </div>
+            <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+            <div class="form-group">
+                <label for="grade">Grade:</label>
+                <select id="grade" name="grade" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Search</button>
+        </form>
+    </div>
+</main>
+    <footer>
+        <p>&copy; 2024 Employee Portal. All rights reserved.</p>
+    </footer>
+</body>
+<script src="Logout.js"></script>
+</html>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const searchButton = document.querySelector('.submit-btn');
+    const usernameSpan = document.getElementById('username');
+    const resultsContainer = document.createElement('div');
+    resultsContainer.id = 'results-container';
+    document.querySelector('main').appendChild(resultsContainer);
+
+    // // Sample username (you can dynamically set it based on logged-in user)
+    // usernameSpan.textContent = "John Doe";
+
+    // Store form results in an array
+    let employeeData = [];
+
+    searchButton.addEventListener('click', (e) => {
+        e.preventDefault(); // Prevent form submission to keep page from refreshing
+
+        // Get values from form inputs
+        const empId = document.getElementById('emp-id').value;
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const dob = document.getElementById('dob').value;
+        const grade = document.getElementById('grade').value;
+
+        // Store the result in the employeeData array
+        const employee = {
+            empId,
+            firstName,
+            lastName,
+            dob,
+            grade
+        };
+
+        employeeData.push(employee);
+
+        // Call function to display data
+        displayResults();
+    });
+
+    function displayResults() {
+        // Clear previous results
+        resultsContainer.innerHTML = '';
+
+        // Create table
+        const table = document.createElement('table');
+        table.border = '1';
+
+        // Table header
+        const tableHeader = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const headers = ['Employee ID', 'First Name', 'Last Name', 'Date of Birth', 'Grade'];
+
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.textContent = headerText;
+            headerRow.appendChild(th);
+        });
+
+        tableHeader.appendChild(headerRow);
+        table.appendChild(tableHeader);
+
+        // Table body
+        const tableBody = document.createElement('tbody');
+        employeeData.forEach(employee => {
+            const row = document.createElement('tr');
+            Object.values(employee).forEach(value => {
+                const td = document.createElement('td');
+                td.textContent = value;
+                row.appendChild(td);
+            });
+            tableBody.appendChild(row);
+        });
+
+        table.appendChild(tableBody);
+
+        // Append the table to the results container
+        resultsContainer.appendChild(table);
+    }
+});
+</script>
+<style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #e2f3e2; 
+}
+main{
+    display: flex;
+    flex-wrap: nowrap;
+    font-family: Arial, sans-serif;
+    margin: 4rem 2rem;
+    padding: 0;
+}
+
+.form-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h3 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Header Styles */
+header {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem;
+    background-color: #4CAF50; 
+    text-align: center;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1{
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+    color: #fff;
+}
+.header-content {
+    flex-grow: 1; /* This makes sure the header content (the title) takes up available space */
+}
+
+/* Logout Button Styles */
+#button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.5s, transform 0.3s;
+  }
+
+#button:hover {
+    background-color: #387a3c; /* Darker green */
+  }
+
+/* Positioning the logout button to the right */
+button#button {
+    position: absolute;
+    right: 50px; 
+    top: 50%;
+    transform: translateY(-50%); /* Vertically centers the button */
+}
+
+/* Footer Styles */
+footer {
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    z-index: 5;
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 600px) {
+    /* Stack the header content for small screens */
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    button#button {
+        position: relative;
+        margin-top: 10px; /* Space out the button from the header content */
+        right: auto;
+        top: auto;
+        transform: none;
+    }
+}
+</style>

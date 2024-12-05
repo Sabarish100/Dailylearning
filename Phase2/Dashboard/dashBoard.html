@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Dashboard</title>
+    <link rel="stylesheet" href="dashBoard.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+
+    <!-- Main Content Section -->
+    <main>
+        <p>Welcome to Phase 2</p>
+        <div class="grid-container">
+            <div class="grid-item" id="grid1">
+                <h2>Product Management System</h2>
+                <img src="download.jpg" alt="Image 1" class="grid-image">
+            </div>
+            <div class="grid-item" id="grid2">
+                <h2>Order Processing System</h2>
+                <img src="OrderProcessing.jpg" alt="Image 1" class="grid-image">
+            </div>
+            <div class="grid-item" id="grid3">
+                <h2>Employee Management System</h2>
+                <img src="employee.jpg" alt="Image 1" class="grid-image">
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+
+</body>
+
+<script>
+    // Add event listeners to the grid items after the page has loaded
+document.addEventListener("DOMContentLoaded", function() {
+    // Get references to the grid items
+    const grid1 = document.getElementById('grid1');
+    const grid2 = document.getElementById('grid2');
+    const grid3 = document.getElementById('grid3');
+
+    // Add click event listeners to each grid item
+    grid1.addEventListener('click', function() {
+        window.location.href = 'ps1.html'; // Redirect to page1.html
+    });
+
+    grid2.addEventListener('click', function() {
+        window.location.href = 'ps2.html'; // Redirect to page2.html
+    });
+
+    grid3.addEventListener('click', function() {
+        window.location.href = 'index.html'; // Redirect to page3.html
+    });
+});
+
+</script>
+</html>

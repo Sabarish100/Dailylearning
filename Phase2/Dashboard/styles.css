@@ -1,0 +1,136 @@
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    /* Body and Layout Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    h2{
+        text-align: center;
+    }
+    /* Header Styling */
+    header {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+    }
+    
+    header h1 {
+        margin: 0;
+    }
+    
+    /* Footer Styling */
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+    }
+
+
+/* Form Wrapper */
+.form-wrapper {
+    background-color: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 55%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-wrapper label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+.form-wrapper input, .form-wrapper select, .form-wrapper button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Results Section */
+#results-section {
+    margin: 20px auto;
+    width: 90%;
+}
+
+#results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0;
+}
+
+#results-table th, #results-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#results-table th {
+    background-color: #333;
+    color: white;
+}
+
+/* Popup Styles */
+.dialog-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 2000;
+}
+/* Dialog Box */
+.dialog-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+}
+
+.dialog-box h3 {
+    margin-top: 0;
+}
+
+.dialog-box label {
+    display: block;
+    margin: 10px 0;
+}
+
+.dialog-box button {
+    margin: 10px 5px 0;
+    padding: 5px 10px;
+}
+.timeout-popup{
+    position : fixed;
+    top : 20px;
+    right : 20px;
+    padding : 10px 20px;
+    background-color : #4CAF50;
+    color : white;
+    border-radius : 5px;
+    box-shadow : 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-Size : 14px;
+}

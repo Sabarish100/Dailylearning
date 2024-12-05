@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management System</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        main {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin: 20px;
+        }
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .form-container {
+            width: 45%;
+        }
+        .result-container {
+            width: 45%;
+        }
+        h1, h2{
+            text-align: center;
+        }
+        .tot{
+            display: block;
+            position: absolute;
+            top: 5em;
+        }
+        form {
+            margin-bottom: 15px;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        #totalCost {
+            font-weight: bold;
+        }
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <h1>Product Management System</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <!-- Add Product Form -->
+            <h2>Add New Product</h2>
+            <form id="addProductForm">
+                <input type="text" id="productName" placeholder="Product Name" required>
+                <input type="number" id="productPrice" placeholder="Product Price" required>
+                <input type="number" id="productQuantity" placeholder="Product Quantity" min="0" required>
+                <button type="submit">Add Product</button>
+            </form>
+            <!-- Update Product Form -->
+            <h2>Update Product Price</h2>
+            <form id="updateProductForm">
+                <input type="text" id="updateProductID" placeholder="Product ID to update" required>
+                <input type="number" id="newProductPrice" placeholder="New Price" required>
+                <button type="submit">Update Price</button>
+            </form>
+            <!-- Apply Discount Form -->
+            <h2>Apply Discount to All Products</h2>
+            <input type="number" id="discountPercentage" placeholder="Discount Percentage" min="0" required>
+            <button id="applyDiscountButton">Apply Discount</button>
+            <!-- Clear Product List Button -->
+            <h2>Clear Product List</h2>
+            <button id="clearProductListButton">Clear All Products</button>
+        </div>
+        <div class="result-container">
+            <!-- Product List Table -->
+            <h2>Product List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Original Price</th>
+                        <th>Discounted Price</th>
+                        <th>Quantity</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody id="productList"></tbody>
+            </table>
+            <!-- Total Cost of All Products -->
+            <div class="tot"><h2>Total Cost of All Products: <span id="totalCost">0.00</span>/-</h2></div>
+        </div>
+    </main>
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </footer>
+    <script>
+        let products = [];
+        let productID = 1;
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add Product Function
+            document.getElementById("addProductForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+                const name = document.getElementById("productName").value;
+                const price = parseFloat(document.getElementById("productPrice").value);
+                const quantity = parseInt(document.getElementById("productQuantity").value);
+                const newProduct = {
+                    id: `P${String(productID).padStart(4, '0')}`,
+                    name: name,
+                    price: price,
+                    originalPrice: price,
+                    quantity: quantity,
+                    totalCost: price * quantity
+                };
+                products.push(newProduct);
+                productID++;
+                displayProducts();
+                this.reset();
+            });
+
+            // Display Products Function
+            function displayProducts() {
+                const productList = document.getElementById("productList");
+                productList.innerHTML = "";
+                let totalCost = 0;
+                products.forEach(product => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.originalPrice.toFixed(2)}/-</td>
+                        <td>${product.price.toFixed(2)}/-</td>
+                        <td>${product.quantity}</td>
+                        <td>${product.totalCost.toFixed(2)}/-</td>
+                    `;
+                    productList.appendChild(row);
+                    totalCost += product.totalCost;
+                });
+                document.getElementById("totalCost").textContent = totalCost.toFixed(2);
+            }
+
+            // Update Product Function
+            document.getElementById("updateProductForm").addEventListener("submit", function(e) {
+                e.preventDefault();
+                const id = document.getElementById("updateProductID").value;
+                const newPrice = parseFloat(document.getElementById("newProductPrice").value);
+                const product = products.find(p => p.id === id);
+                if (product) {
+                    product.originalPrice = newPrice;
+                    product.price = newPrice;
+                    product.totalCost = product.price * product.quantity;
+                    displayProducts();
+                } else {
+                    alert("Product not found!");
+                }
+                this.reset();
+            });
+
+            // Apply Discount Function
+            document.getElementById("applyDiscountButton").addEventListener("click", function() {
+                const discount = parseFloat(document.getElementById("discountPercentage").value);
+                if (isNaN(discount) || discount < 0 || discount > 100) {
+                    alert("Please enter a valid discount percentage.");
+                    return;
+                }
+                products.forEach(product => {
+                    product.price = product.originalPrice - (product.originalPrice * (discount / 100));
+                    product.totalCost = product.price * product.quantity;
+                });
+                displayProducts();
+                document.getElementById("discountPercentage").value = '';
+            });
+
+            // Clear Product List Function
+            document.getElementById("clearProductListButton").addEventListener("click", function() {
+                products = [];
+                displayProducts();
+            });
+        });
+    </script>
+</body>
+</html>

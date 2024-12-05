@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+    }
+    .form-container {
+      width: 45%;
+    }
+    .result-container {
+      width: 45%;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    form {
+      margin-bottom: 15px;
+    }
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    #totalCost {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <!-- Add Product Form -->
+    <h2>Add New Product</h2>
+    <form id="addProductForm">
+      <input type="text" id="productName" placeholder="Product Name" required>
+      <input type="number" id="productPrice" placeholder="Product Price" required>
+      <input type="number" id="productQuantity" placeholder="Product Quantity" min="0" required>
+      <button type="submit">Add Product</button>
+    </form>
+
+    <!-- Update Product Form -->
+    <h2>Update Product Price</h2>
+    <form id="updateProductForm">
+      <input type="text" id="updateProductID" placeholder="Product ID to update" required>
+      <input type="number" id="newProductPrice" placeholder="New Price" required>
+      <button type="submit">Update Price</button>
+    </form>
+
+    <!-- Apply Discount Form -->
+    <h2>Apply Discount to All Products</h2>
+    <input type="number" id="discountPercentage" placeholder="Discount Percentage" min="0" required>
+    <button id="applyDiscountButton">Apply Discount</button>
+
+    <!-- Clear Product List Button -->
+    <h2>Clear Product List</h2>
+    <button id="clearProductListButton">Clear All Products</button>
+  </div>
+
+  <div class="result-container">
+    <!-- Product List -->
+    <h2>Product List</h2>
+    <ul id="productList"></ul>
+
+    <!-- Total Cost of All Products -->
+    <h2>Total Cost of All Products: <span id="totalCost">0.00</span>/-</h2>
+  </div>
+
+  <script>
+    let products = [];
+    let productID = 1;
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Add Product Function
+        document.getElementById("addProductForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const name = document.getElementById("productName").value;
+        const price = parseFloat(document.getElementById("productPrice").value);
+        const quantity = parseInt(document.getElementById("productQuantity").value);
+        
+        const newProduct = {
+            id: `P${String(productID).padStart(4, '0')}`,
+            name: name,
+            price: price,
+            originalPrice: price, // Store the original price
+            quantity: quantity,
+            totalCost: price * quantity // Calculate total cost for this product
+        };
+        
+        products.push(newProduct);
+        productID++;
+        displayProducts();
+        this.reset();
+        });
+
+        // Display Products Function
+        function displayProducts() {
+        const productList = document.getElementById("productList");
+        productList.innerHTML = "";
+        let totalCost = 0;
+        products.forEach(product => {
+            const li = document.createElement("li");
+            li.textContent = `ID: ${product.id}, Name: ${product.name}, 
+                            Original Price: ${product.originalPrice.toFixed(2)}/-, 
+                            Discounted Price: ${product.price.toFixed(2)}/-, 
+                            Quantity: ${product.quantity}, 
+                            Total Cost: ${product.totalCost.toFixed(2)}/-`;
+            productList.appendChild(li);
+            totalCost += product.totalCost;
+        });
+        
+        // Update the total cost of all products
+        document.getElementById("totalCost").textContent = totalCost.toFixed(2);
+        }
+
+        // Update Product Function
+        document.getElementById("updateProductForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const id = document.getElementById("updateProductID").value;
+        const newPrice = parseFloat(document.getElementById("newProductPrice").value);
+
+        const product = products.find(p => p.id === id);
+        if (product) {
+            // Update both the original price and the discounted price
+            product.originalPrice = newPrice; // Update the original price
+            product.price = newPrice;         // Update the discounted price as well
+            product.totalCost = product.price * product.quantity; // Recalculate total cost based on new price and quantity
+            displayProducts();
+        } else {
+            alert("Product not found!");
+        }
+        this.reset();
+        });
+
+        // Apply Discount Function
+        function applyDiscount() {
+        const discount = parseFloat(document.getElementById("discountPercentage").value);
+        if (isNaN(discount) || discount < 0 || discount > 100) {
+            alert("Please enter a valid discount percentage.");
+            return;
+        }
+        products.forEach(product => {
+            product.price = product.originalPrice - (product.originalPrice * (discount / 100)); // Apply discount to original price
+            product.totalCost = product.price * product.quantity; // Recalculate total cost based on the new discounted price and quantity
+        });
+        displayProducts();
+        }
+
+        // Add event listener for applying discount
+        document.getElementById("applyDiscountButton").addEventListener("click", applyDiscount);
+
+        // Clear Product List Function
+        document.getElementById("clearProductListButton").addEventListener("click", function() {
+        products = []; // Clear the product array
+        displayProducts(); // Refresh the display
+        });
+    });
+  </script>
+
+</body>
+</html>

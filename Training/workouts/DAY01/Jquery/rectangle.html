@@ -1,0 +1,65 @@
+<head>  
+    <title>Rectangle</title>  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>  
+<body>  
+    <label for="length">Enter the length:</label>  
+    <input type="number" id="length" min="0" step="1">  
+    
+    <label for="breadth">Enter the breadth:</label>  
+    <input type="number" id="breadth" min="0" step="1"><br><br>  
+
+    <!-- Checkboxes to select area or perimeter -->
+    <label>
+        <input type="checkbox" id="perimeterCheckbox"  > Perimeter
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="areaCheckbox" > Area
+    </label><br>
+
+    <label>
+        <input type="checkbox" id="bothCheckbox" > Both
+    </label><br><br>
+
+    <p id="result"></p>
+</body>
+
+<script>  
+$(()=>{
+     // Function to calculate and display the result based on selected checkboxes
+     $("#calculateButton").click(function(){
+ 
+        let length = $("#length").val();
+        let breadth = $("#breadth").val();
+
+        // Initialize the result message
+        let resultMessage = "";
+        
+        // Check if the Perimeter checkbox is checked
+        if ($("#perimeterCheckbox").is(':checked')) {
+            let perimeterValue = 2 * (parseInt(length) + parseInt(breadth));
+            resultMessage += "Perimeter: " + perimeterValue + "<br>";
+            console.log(resultMessage);
+            $("#Result").text(resultMessage);
+        }
+        
+        // Check if the Area checkbox is checked
+        if ($("#areaCheckbox").is(':checked')) {
+            let areaValue = parseFloat(length) * parseFloat(breadth);
+            resultMessage += "Area: " + areaValue + "<br>";
+        }
+
+        // Check if the Both checkbox is checked
+        if ($("bothCheckbox").is(':checked')) {
+            let perimeterValue = 2 * (parseFloat(length) + parseFloat(breadth));
+            let areaValue = parseFloat(length) * parseFloat(breadth);
+            resultMessage += "Perimeter: " + perimeterValue + "<br>Area: " + areaValue + "<br>";
+        }
+        
+        // Display the result
+        $("result").text(resultMessage ? resultMessage : "Please select an option!");
+    });
+});
+   
+</script>
