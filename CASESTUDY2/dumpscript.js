@@ -136,3 +136,22 @@ function resetForm() {
     document.getElementById("search-button").textContent = "Search"; // Reset button text to Search
 }
 
+const logOutButton = document.getElementById("button");
+logOutButton.addEventListener("click", (event) => {
+    logout();
+});
+
+// document.getElementById('username').textContent = username;
+
+
+function logout() {
+sessionStorage.removeItem("loggedIn");
+window.location.href = "loginPage.html"; // Redirect to login page
+}
+
+// Check if the user is already logged out
+window.onload = function() {
+if (!sessionStorage.getItem("loggedIn")) {
+    window.location.href = "loginPage.html"; // Redirect if not logged in
+}
+};
