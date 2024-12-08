@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page 1</title>
+    <title>Employee Management System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header Section -->
+    <!-- Sticky Header -->
     <header>
-        <h1>Dashboard</h1>
+        <h1>Employee Management System</h1>
     </header>
-        
+<div name="content">
     <!-- Search Form -->
     <div class="form-wrapper">
         <h2>Search Options</h2>
@@ -26,10 +26,10 @@
             <input type="text" id="lastName" placeholder="Enter Last Name">
 
             <label for="dob">Date of Birth:</label>
-            <input type="date" id="dob">
+            <input type="date" id="dob" placeholder="yyyy-mm-dd">
 
             <label for="doj">Date of Joining:</label>
-            <input type="date" id="doj">
+            <input type="date" id="doj" placeholder="yyyy-mm-dd">
 
             <label for="grade">Grade:</label>
             <select id="grade">
@@ -40,6 +40,7 @@
             </select>
 
             <button type="button" id="search-button">Search</button>
+            <div id="message"></div>
         </form>
     </div>
 
@@ -55,16 +56,18 @@
                     <th>Date of Birth</th>
                     <th>Date of Joining</th>
                     <th>Grade</th>
-                    <th>View</th>
+                    <!-- <th>View</th> -->
                     <th>Modify</th>
                 </tr>
             </thead>
             <tbody></tbody>
+            <div id="message">Item added to cart!</div>
         </table>
     </div>
+</div>
 
     <!-- Dialog Box for Viewing Details -->
-    <div id="view-dialog" class="dialog-box" style="display: none;">
+    <!-- <div id="view-dialog" class="dialog-box" style="display: none;">
         <h3>Employee Details</h3>
         <p><strong>Employee ID:</strong> <span id="view-empId"></span></p>
         <p><strong>First Name:</strong> <span id="view-firstName"></span></p>
@@ -73,10 +76,10 @@
         <p><strong>Date of Joining:</strong> <span id="view-doj"></span></p>
         <p><strong>Grade:</strong> <span id="view-grade"></span></p>
         <button id="close-view">Close</button>
-    </div>
+    </div> -->
 
     <!-- Dialog Box for Modifying Details -->
-    <div id="modify-dialog" class="dialog-box" style="display: none;">
+    <!-- <div id="modify-dialog" class="dialog-box" style="display: none;">
         <h3>Modify Employee Details</h3>
         <label>First Name: <input type="text" id="edit-firstName"></label>
         <label>Last Name: <input type="text" id="edit-lastName"></label>
@@ -88,16 +91,14 @@
                 <option value="M2">M2</option>
                 <option value="M3">M3</option>
             </select>
-        </label>
+        <!-- </label>
         <button id="save-changes">Save Changes</button>
-        <button id="close-modify">Close</button>
-    </div>
-
-    <!-- Footer Section -->
+        <button id="close-modify">Close</button> 
+    </div> -->
     <footer>
         <p>&copy; 2024 Your Company. All rights reserved.</p>
     </footer>
 
+    <script src="dumpscript.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Demo</title>
+  <style>
+    #container {
+      width: 300px;
+      height: 200px;
+      overflow: auto;
+      border: 2px solid #ccc;
+      position: relative;
+    }
+    .content {
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(to bottom right, #683e3e, #ccffcc);
+    }
+  </style>
+</head>
+<body>
+  <button onclick="scrollToPosition()">Scroll to Position</button>
+  <div id="container">
+    <div class="content"></div>
+  </div>
+  <script>
+    function scrollToPosition() {
+      const container = document.getElementById('container');
+      container.scroll({
+        top: 200,
+        left: 200,
+        behavior: 'smooth',
+      });
+    }
+  </script>
+</body>
+</html>

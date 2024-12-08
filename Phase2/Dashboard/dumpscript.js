@@ -54,7 +54,7 @@ function displayResults(results) {
     tableBody.innerHTML = "";
 
     if (results.length === 0) {
-        alert("No matching employees found.");
+        showMessage("No matching employees found.");
         return;
     }
 
@@ -84,6 +84,7 @@ function attachModifyButtons() {
             const empId = btn.dataset.id;
             const employee = employees.find((emp) => emp.id === empId);
             loadEmployeeIntoForm(employee);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 }
@@ -116,7 +117,7 @@ function modifyEmployee() {
     employee.doj = document.getElementById("doj").value;
     employee.grade = document.getElementById("grade").value;
 
-    alert("Changes saved successfully!");
+    showMessage("Changes saved successfully!");
 
     displayResults(employees); // Refresh results
     resetForm();
@@ -136,3 +137,11 @@ function resetForm() {
     document.getElementById("search-button").textContent = "Search"; // Reset button text to Search
 }
 
+function showMessage(message) {
+    const messageDiv = document.getElementById("message");
+    messageDiv.innerText = message;
+    messageDiv.style.display = "block";
+    setTimeout(() => {
+        messageDiv.style.display = "none";
+    }, 3000);
+}

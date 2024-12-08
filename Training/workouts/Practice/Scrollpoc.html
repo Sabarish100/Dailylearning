@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Back to Top Button</title>
+  <style>
+#backToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+#backToTopBtn:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+  <div style="height: 2000px; padding: 20px;">
+    <h1>Scroll Down</h1>
+    <p>Scroll the page to see the "Back to Top" button appear.</p>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="backToTopBtn" onclick="scrollToTop()">⬆️ Back to Top</button>
+
+</body>
+<script>
+// Select the button element
+const button = document.getElementById('backToTopBtn');
+
+// Show the button when the user scrolls down 100px
+window.addEventListener('scroll', function() {
+  if (document.documentElement.scrollTop > 100) {
+    button.style.display = 'block';
+  } else {
+    button.style.display = 'none';
+  }
+});
+
+// Scroll back to the top when the button is clicked
+button.addEventListener('click', function() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+
+</script>
+</html>
