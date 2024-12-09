@@ -54,7 +54,7 @@ function displayResults(results) {
     tableBody.innerHTML = "";
 
     if (results.length === 0) {
-        alert("No matching employees found.");
+        showMessage("No matching employees found.");
         return;
     }
 
@@ -84,6 +84,7 @@ function attachModifyButtons() {
             const empId = btn.dataset.id;
             const employee = employees.find((emp) => emp.id === empId);
             loadEmployeeIntoForm(employee);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
 }
@@ -116,7 +117,7 @@ function modifyEmployee() {
     employee.doj = document.getElementById("doj").value;
     employee.grade = document.getElementById("grade").value;
 
-    alert("Changes saved successfully!");
+    showMessage("Changes saved successfully!");
 
     displayResults(employees); // Refresh results
     resetForm();
@@ -136,22 +137,23 @@ function resetForm() {
     document.getElementById("search-button").textContent = "Search"; // Reset button text to Search
 }
 
-const logOutButton = document.getElementById("button");
-logOutButton.addEventListener("click", (event) => {
-    logout();
-});
-
-// document.getElementById('username').textContent = username;
-
+function showMessage(message) {
+    const messageDiv = document.getElementById("message");
+    messageDiv.innerText = message;
+    messageDiv.style.display = "block";
+    setTimeout(() => {
+        messageDiv.style.display = "none";
+    }, 3000);
+}
 
 function logout() {
-sessionStorage.removeItem("loggedIn");
-window.location.href = "loginPage.html"; // Redirect to login page
+    sessionStorage.removeItem("loggedIn");
+    window.location.href = "loginPage.html"; // Redirect to login page
 }
 
 // Check if the user is already logged out
 window.onload = function() {
-if (!sessionStorage.getItem("loggedIn")) {
-    window.location.href = "loginPage.html"; // Redirect if not logged in
-}
+    if (!sessionStorage.getItem("loggedIn")) {
+        window.location.href = "loginPage.html"; // Redirect if not logged in
+    }
 };

@@ -9,12 +9,10 @@
 <body>
     <!-- Sticky Header -->
     <header>
-        <div>
         <h1>Employee Management System</h1>
-        </div>
-        <button type="button" id="button">Logout</button>
+        <button onclick="logout()" id="button">Logout</button>
     </header>
-
+<div name="content">
     <!-- Search Form -->
     <div class="form-wrapper">
         <h2>Search Options</h2>
@@ -43,6 +41,7 @@
             </select>
 
             <button type="button" id="search-button">Search</button>
+            <div id="message"></div>
         </form>
     </div>
 
@@ -58,43 +57,16 @@
                     <th>Date of Birth</th>
                     <th>Date of Joining</th>
                     <th>Grade</th>
-                    <!-- <th>View</th> -->
                     <th>Modify</th>
                 </tr>
             </thead>
             <tbody></tbody>
+            <div id="message">Item added to cart!</div>
         </table>
     </div>
+</div>
 
-    <!-- Dialog Box for Viewing Details -->
-    <div id="view-dialog" class="dialog-box" style="display: none;">
-        <h3>Employee Details</h3>
-        <p><strong>Employee ID:</strong> <span id="view-empId"></span></p>
-        <p><strong>First Name:</strong> <span id="view-firstName"></span></p>
-        <p><strong>Last Name:</strong> <span id="view-lastName"></span></p>
-        <p><strong>Date of Birth:</strong> <span id="view-dob"></span></p>
-        <p><strong>Date of Joining:</strong> <span id="view-doj"></span></p>
-        <p><strong>Grade:</strong> <span id="view-grade"></span></p>
-        <button id="close-view">Close</button>
-    </div>
 
-    <!-- Dialog Box for Modifying Details -->
-    <div id="modify-dialog" class="dialog-box" style="display: none;">
-        <h3>Modify Employee Details</h3>
-        <label>First Name: <input type="text" id="edit-firstName"></label>
-        <label>Last Name: <input type="text" id="edit-lastName"></label>
-        <label>Date of Birth: <input type="date" id="edit-dob"></label>
-        <label>Date of Joining: <input type="date" id="edit-doj"></label>
-        <label>Grade:
-            <select id="edit-grade">
-                <option value="M1">M1</option>
-                <option value="M2">M2</option>
-                <option value="M3">M3</option>
-            </select>
-        </label>
-        <button id="save-changes">Save Changes</button>
-        <button id="close-modify">Close</button>
-    </div>
     <footer>
         <p>&copy; 2024 Your Company. All rights reserved.</p>
     </footer>

@@ -62,7 +62,7 @@
     background-color: white;
     margin: 20px auto;
     padding: 20px;
-    width: 55%;
+    width: 40%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -100,56 +100,39 @@
     color: white;
 }
 
-/* Popup Styles */
-.dialog-box {
+
+#message{
     position: fixed;
-    top: 50%;
+    top: 20px;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 50%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateX(-50%);
+    background-color: #1abc9c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
     display: none;
-    z-index: 2000;
 }
-/* Dialog Box */
-.dialog-box {
-    position: fixed;
+
+/* Logout Button Styles */
+#button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.5s, transform 0.3s;
+  }
+
+#button:hover {
+    background-color: #387a3c; /* Darker green */
+  }
+
+/* Positioning the logout button to the right */
+button#button {
+    position: absolute;
+    right: 50px; 
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    width: 300px;
-}
-
-.dialog-box h3 {
-    margin-top: 0;
-}
-
-.dialog-box label {
-    display: block;
-    margin: 10px 0;
-}
-
-.dialog-box button {
-    margin: 10px 5px 0;
-    padding: 5px 10px;
-}
-.timeout-popup{
-    position : fixed;
-    top : 20px;
-    right : 20px;
-    padding : 10px 20px;
-    background-color : #4CAF50;
-    color : white;
-    border-radius : 5px;
-    box-shadow : 0 2px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    font-Size : 14px;
+    transform: translateY(-50%); /* Vertically centers the button */
 }
