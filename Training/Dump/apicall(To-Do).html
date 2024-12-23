@@ -90,6 +90,22 @@ button[type="submit"] {
     cursor: pointer;
 }
 
+.popup {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
     </style>
 </head>
 <body>
@@ -104,6 +120,7 @@ button[type="submit"] {
     <div>
         <ul id="todo-list"></ul>
     </div>
+    <div id="popup" class="popup"></div>
     <script>
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -111,6 +128,7 @@ button[type="submit"] {
             const addTodoForm = document.getElementById('add-todo-form');
             const newTodoInput = document.getElementById('new-todo');
             const userIdInput = document.getElementById('user-id');
+            const popup = document.getElementById('popup');
 
             // Fetch and display all to-dos
             fetch('https://dummyjson.com/todos')
@@ -127,6 +145,7 @@ button[type="submit"] {
                 event.preventDefault();
                 const todoText = newTodoInput.value.trim();
                 const userId = parseInt(userIdInput.value.trim(), 10);
+                showPopup('Task Created');
 
                 if (todoText && userId) {
                     const newTodo = {
@@ -201,8 +220,25 @@ button[type="submit"] {
                     .then(res => res.json())
                     .then(() => {
                         listItem.remove();
+                        showPopup('Task Deleted');
                     })
                     .catch(error => console.error('Error deleting todo:', error));
+            }
+
+                // Function to show popup messages 
+            function showPopup(message) {
+                // Set the message content
+                popup.textContent = message;
+
+                // Make the popup visible
+                popup.style.visibility = 'visible';
+                popup.style.opacity = '1';
+
+                // Hide the popup after 2 seconds
+                setTimeout(() => {
+                    popup.style.opacity = '0';
+                    popup.style.visibility = 'hidden';
+                }, 2000);
             }
         });
 
