@@ -152,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sessionStorage.removeItem("loggedIn");
         window.location.href = "loginPage.html"; // Redirect to login page
     }
+    document.getElementById('logOut-button').addEventListener('click', logout);
 
     // Check if the user is already logged out
     window.onload = function() {

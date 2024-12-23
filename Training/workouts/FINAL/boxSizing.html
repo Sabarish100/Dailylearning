@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>box-sizing Example</title>
+  <style>
+    *{
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    /* header{
+      text-align: center;
+      color: black;
+      width: 100%;
+      background-color: #f491d8;
+      padding: 10px;
+      position: fixed;
+      top: 0;
+    } */
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: url("color.jpg") no-repeat;
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+    }
+    .loginBox{
+      background-color: transparent;
+      border: 2px solid rgba(225,225,225,0.2);
+      backdrop-filter: blur(5px);
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      padding: 1rem;
+      width: clamp(14rem, 65%, 20rem);
+      height: fit-content;
+      box-shadow: 4px 5px 14px 0px;
+      border-radius: 20px;
+    }
+    h2{
+      text-align: center;
+      color: #efefef;
+    }
+    .inputBox{
+      position: relative;
+    }
+    .inputBox input{
+      width: 100%;
+      height: 100%;
+      padding: 7px 10px;
+      margin-top: 1rem;
+      background: transparent;
+      border: 2px solid white;
+      border-radius: 40px;
+      font-size: 1em;
+      color: #fff;
+    }
+    .inputBox input::placeholder{
+      color: white;
+      font-size: 1em;
+    }
+    .inputBox svg{
+      position: absolute;
+      right: 1rem;
+      top: 72%;
+      transform: translateY(-68%);
+      color: white;
+    }
+    .rememberMe{
+      display: flex;
+      color: #fff;
+      margin-top: 1em;
+      justify-content: space-between;
+      font-size: clamp(13px , 15px, 1rem);
+    }
+    .rememberMe a{
+      color: #fff;
+      text-decoration: none;
+    }
+    .rememberMe a:hover{
+      text-decoration: underline;
+      color: #000000;
+      transition: all 0.50s ease;
+    }
+    .loginBox .btn{
+      display: flex;
+      justify-content: center;
+      width: 15rem;
+      padding: 8px;
+      background-color: #efefef;
+      border: none;
+      outline: none;
+      border-radius: 40px;
+      margin: 5px auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      font-size: 1rem;
+      color: black;
+      font-weight: 600;
+    }
+    .btn:hover{
+      width: 17rem;
+      background-color: skyblue;
+      transition: all 1s ease;
+    }
+    .registerLink{
+      margin-top: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .registerLink p{
+      color: #fff;
+      font-size: clamp(13px , 15px, 1rem);
+    }
+    .registerLink p a{
+      text-decoration: none;
+      font-weight: 500;
+      color: #fff;
+    }
+    .registerLink p a:hover{
+      text-decoration: underline;
+      color: #000000;
+      transition: all 0.50s ease;
+    }
+    /* footer{
+      width: 100%;
+      padding: 16px;
+      color: black;
+      bottom: 0px;
+      position: fixed;
+      background-color: #50cdf2;
+      text-align: center;
+    } */
+  </style>
+</head>
+<body>
+  <!-- <header>
+    <h1>Heading</h1>
+  </header> -->
+  <div class="loginBox">
+    <form action="">
+    <h2>Login</h2>
+
+    <div class="inputBox">
+    <input id="usernameFieldId" type="text" placeholder="Username" required>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
+      </svg>
+    </div>
+
+    <div class="inputBox">
+    <input id="passwordFieldId" type="password" placeholder="Password" required>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lock" viewBox="0 0 16 16">
+        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2M5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1"/>
+      </svg>
+    </div>
+    <p class="errorMessage"></p>
+    <div class="rememberMe">
+      <label><input type="checkbox">Remember Me</label>
+      <a href="#">Forgot Password?</a>
+    </div>
+    <button type="submit" class="btn">Login</button>
+    <div class="registerLink">
+      <p>Don't have an account?<a href="#">Register</a></p>
+    </div>
+  </form>
+  </div>
+
+  <!-- <footer>
+    © 2024 Webpage Under-Construction. All rights reserved.
+  </footer> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      class Login {
+        constructor(usernameFieldId, passwordFieldId, errorFieldClass) {
+          this.usernameField = document.getElementById(usernameFieldId);
+          this.passwordField = document.getElementById(passwordFieldId);
+          this.errorField = document.getElementsByClassName(errorFieldClass)[0];
+        }
+
+        validateCredentials(username, password) {
+          // Simple hardcoded validation
+          return username === "sabarish" && password === "password";
+        }
+
+        displayError(message) {
+          this.errorField.innerText = message;
+        }
+
+        handleLogin(event) {
+          event.preventDefault(); // Prevent form submission
+          const username = this.usernameField.value;
+          const password = this.passwordField.value;
+
+          if (this.validateCredentials(username, password)) {
+            sessionStorage.setItem("loggedIn", "true");
+            window.location.href = "dashboard.html";
+          } else {
+            this.displayError("Invalid username or password.");
+          }
+        }
+      }
+
+      // Attach event listener to the login button
+      const loginHandler = new Login("usernameFieldId", "passwordFieldId", "errorMessage");
+      document.querySelector(".btn").addEventListener("click", (event) => {
+        loginHandler.handleLogin(event);
+      });
+    });
+
+  </script>
+</body>
+</html>

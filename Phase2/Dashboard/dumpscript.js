@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-
+    event.preventDefault();
     // Sample Employee Data
     const employees = [
         { id: "50003", firstName: "Vijay", lastName: "V", dob: "2002-06-05", doj: "2017-06-21", grade: "M3" },

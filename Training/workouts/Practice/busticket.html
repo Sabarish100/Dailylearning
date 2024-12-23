@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+  class BusTicket{
+    constructor(Id, Name, Price, Source, Destination){
+        this.id = Id;
+        this.name = Name;
+        this.price = Price;
+        this.source = Source;
+        this.destination = Destination;
+    }
+}
+
+
+
+
+
+class BusTicketController{
+    constructor(){
+        this.bustickets = [];
+    }
+
+    bookTicket(ticket){
+        this.bustickets.push(ticket);
+    }
+
+    cancelTicket(id){
+
+        const ind = this.bustickets.findIndex(t=> t.id == id);
+
+        if(ind != -1){
+            this.bustickets.splice(ind, 1);
+            return true
+        }
+        return false;
+    }
+
+    updateTicket(tickect){
+        const tickettobeupdated = this.bustickets.find(t=> t.id == tickect.id);
+        if(tickettobeupdated){
+            Object.assign(tickettobeupdated, tickect);
+            return true;
+        }
+        return false;
+    }
+}
+ 
+
+const buscon = new BusTicketController();
+
+buscon.bookTicket(new BusTicket(1, "adel", 2000, "cbe", "mas"));
+buscon.bookTicket(new BusTicket(2, "abel", 2000, "cbe", "poy"));
+buscon.bookTicket(new BusTicket(3, "adal", 2000, "cbe", "try"));
+console.log(buscon.bustickets);
+
+console.log(buscon.updateTicket(new BusTicket(2, "santhu", 3000, "jap", "hong")));
+console.log(buscon.updateTicket(new BusTicket(10, "santhu", 3000, "jap", "hong")));
+console.log(buscon.bustickets);
+console.log(buscon.cancelTicket(3));
+console.log(buscon.cancelTicket(10));
+
+console.log(buscon.bustickets);
+
+</script>
+<body>
+    
+</body>
+</html>
+
+
+
+
+
+<!-- 
+
+
+class Ticket{
+    constructor(filmName, showTime){
+        this.id = genarateid();
+        this.movieName = filmName;
+        this.time = showTime;
+    }
+}
+let num = 1;
+ function genarateid(){
+    return ++num;
+ }
+ 
+ 
+ class TicketController{
+     constructor(){
+         this.ticketArray = [];
+        }
+        addTicket(tickect){
+            
+            this.ticketArray.push(tickect);
+        }
+        
+        showAllTickets(){
+            return this.ticketArray;
+        }
+        
+        removeTicket(tickect){
+            const tickInd = this.ticketArray.findIndex(t=> t.id === tickect.id);
+            
+            this.ticketArray.splice(tickInd, 1);
+        }
+    }
+    
+const pushpa2 = new Ticket("Pushpa2", 1800);
+    
+const viduthalai = new Ticket("Viduthalai2", 2000);
+
+const tickCont = new TicketController();
+tickCont.addTicket(pushpa2);
+tickCont.addTicket(viduthalai);
+console.log(tickCont.showAllTickets());
+tickCont.removeTicket(pushpa2);
+console.log(tickCont.showAllTickets()); 
+
+
+
+
+
+// Define the BusTicket class
+class BusTicket {
+  constructor(firstName, lastName, source, destination, dateOfJourney) {
+
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.source = source;
+    this.destination = destination;
+    this.dateOfJourney = dateOfJourney;
+    
+  }
+
+  // Method to display ticket details
+  printTicketDetails() {
+    console.log("Bus Ticket Details:");
+    console.log(`Name: ${this.firstName} ${this.lastName}`);
+    console.log(`Source: ${this.source}`);
+    console.log(`Destination: ${this.destination}`);
+    console.log(`Date of Journey: ${this.dateOfJourney}`);
+  }
+}
+
+// Collect user input
+const firstName = prompt("Enter your first name:");
+const lastName = prompt("Enter your last name:");
+const source = prompt("Enter your source location:");
+const destination = prompt("Enter your destination:");
+const dateOfJourney = prompt("Enter the date of journey (YYYY-MM-DD):");
+
+// Create a new BusTicket instance
+const userTicket = new BusTicket(firstName, lastName, source, destination, dateOfJourney);
+
+// Print ticket details
+userTicket.printTicketDetails(); -->
