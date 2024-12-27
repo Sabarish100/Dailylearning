@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Media Buttons</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f0f0;
+}
+
+.social-container {
+  display: flex;
+  gap: 20px;
+}
+
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  color: #555;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.social-button.facebook {
+  color: #3b5998;
+}
+
+.social-button.twitter {
+  color: #1da1f2;
+}
+
+.social-button.instagram {
+  color: #e4405f;
+}
+
+.social-button.linkedin {
+  color: #0077b5;
+}
+
+  </style>
+</head>
+<body>
+  <div class="social-container">
+    <a href="#" class="social-button facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="#" class="social-button twitter">
+      <i class="fab fa-twitter"></i>
+    </a>
+    <a href="#" class="social-button instagram">
+      <i class="fab fa-instagram"></i>
+    </a>
+    <a href="#" class="social-button linkedin">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+  </div>
+
+</body>
+</html>

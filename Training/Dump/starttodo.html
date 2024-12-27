@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-color: #F5EFE8;
+        }
+
+        header {
+            width: 100%;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            padding: 15px 0;
+            background-color: #BFAE9F;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        #app {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        form {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            width: 250px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #C9BEB9;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #BFAE9F;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #937962;
+        }
+
+        ul {
+            list-style-type: none;
+            width: 70%;
+            margin: 20px auto;
+            padding: 0;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        li.completed {
+            text-decoration: line-through;
+            color: #BFAE9F;
+        }
+
+        .button-container button {
+            background-color: transparent;
+            border: none;
+            color: #d32f2f;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+
+        .button-container button:hover {
+            transform: scale(1.2);
+        }
+
+        #container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        #filter:focus, #search:focus {
+            border-color: #C9BEB9;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        .popup {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #C9BEB9;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+            padding: 15px 20px;
+            z-index: 1000;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            text-align: center;
+            padding: 10px;
+            background-color: #BFAE9F;
+            color: #fff;
+            width: 100%;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                font-size: 1.5rem;
+                padding: 10px;
+            }
+
+            #app {
+                width: 100%;
+                padding: 15px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            select {
+                width: 100%;
+            }
+
+            #container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            #filter, #search {
+                width: 100%;
+            }
+
+            ul {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>To-Do List</header>
+    <div id="app">
+        <form id="add-todo-form">
+            <input type="text" id="new-todo" placeholder="Enter new to-do" required>
+            <input type="number" id="user-id" placeholder="Enter user ID" required>
+            <select id="status" required>
+                <option value="false">Pending</option>
+                <option value="true">Completed</option>
+            </select>
+            <button type="submit">ADD</button>
+        </form>
+    </div>
+    <div id="container">
+        <select id="filter">
+            <option value="all">All Tasks</option>
+            <option value="completed">Completed Tasks</option>
+            <option value="incomplete">Incomplete Tasks</option>
+        </select>
+        <input type="text" id="search" placeholder="Search tasks...">
+    </div>
+    <ul id="todo-list"></ul>
+    <div id="popup" class="popup"></div>
+    <footer>&copy; 2024 Your Company. All rights reserved.</footer>
+    <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+    const todoList = document.getElementById('todo-list');
+    const addTodoForm = document.getElementById('add-todo-form');
+    const newTodoInput = document.getElementById('new-todo');
+    const userIdInput = document.getElementById('user-id');
+    const statusInput = document.getElementById('status');
+    const searchInput = document.getElementById('search');
+    const filterInput = document.getElementById('filter');
+    const popup = document.getElementById('popup');
+
+    let todos = [];
+
+//     async function fetchFromEndPoint(url, options = {}) {
+//     try {
+//         const response = await fetch(url, options);
+//         if (!response.ok) {
+//             throw new Error("Failed to fetch data.");
+//         }
+//         return await response.json();
+//     } catch (error) {
+//         printToastMessage('Failed to fetch post data.');
+//         }
+//     }
+
+//     function printToastMessage(error) {
+//     Toastify({
+//         text: `${error}`,
+//         duration: 2000,
+//         gravity: "top",
+//         position: "right",
+//         className: "toastify",
+//         backgroundColor: "linear-gradient(to right, #dc3545, #c82333)",
+//     }).showToast();
+// }
+
+
+
+    // Fetch and display
+    fetchFromEndPoint('https://dummyjson.com/todos')
+        .then(data => {
+            if (data) {
+                todos = data.todos;
+                todos.forEach(todo => {
+                    displayTodo(todo);
+                });
+            }
+        });
+
+    // Add new to-do
+    addTodoForm.addEventListener('submit', async event => {
+        event.preventDefault();
+        const todoText = newTodoInput.value.trim();
+        const userId = parseInt(userIdInput.value.trim());
+        const isCompleted = statusInput.value === 'true';
+        const isDuplicate = todos.some(todo => todo.todo === todoText && todo.userId === userId);
+
+        if (isDuplicate) {
+            showPopup('Task already exists for this user ID!');
+            return;
+        }
+
+        showPopup('Task Created');
+
+        if (todoText && userId) {
+            const newTodo = {
+                todo: todoText,
+                completed: isCompleted,
+                userId: userId
+            };
+
+            const todo = await fetchFromEndPoint('https://dummyjson.com/todos/add', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newTodo)
+            });
+
+            if (todo) {
+                todos.unshift(todo);
+                displayTodoAtStart(todo);
+                addTodoForm.reset();
+            }
+        }
+    });
+
+    // Search functionality
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        try {
+            const filteredTodos = todos.filter(todo => todo.todo.toLowerCase().includes(query));
+            todoList.innerHTML = '';
+
+            if (filteredTodos.length > 0) {
+                filteredTodos.forEach(todo => displayTodo(todo));
+            } else {
+                showPopup('No matching tasks found.');
+            }
+        } catch (error) {
+            console.error('Error filtering todos:', error);
+            showPopup('Error while searching tasks.');
+        }
+    });
+
+    // Filter functionality
+    filterInput.addEventListener('change', () => {
+        const filterValue = filterInput.value;
+        try {
+            if (filterValue === 'all') {
+                filterAndDisplayTodos(() => true);
+            } else if (filterValue === 'completed') {
+                filterAndDisplayTodos(todo => todo.completed);
+            } else if (filterValue === 'incomplete') {
+                filterAndDisplayTodos(todo => !todo.completed);
+            }
+        } catch (error) {
+            console.error('Error filtering todos:', error);
+            showPopup('Error while filtering tasks.');
+        }
+    });
+
+    // Helper functions remain unchanged
+    function filterAndDisplayTodos(filterFn) {
+        todoList.innerHTML = ''; // Clear the list
+        todos.filter(filterFn).forEach(todo => displayTodo(todo));
+    }
+
+    function displayTodo(todo) {
+        const li = createTodoElement(todo);
+        todoList.appendChild(li);
+    }
+
+    function displayTodoAtStart(todo) {
+        const li = createTodoElement(todo);
+        todoList.insertBefore(li, todoList.firstChild);
+    }
+
+    function createTodoElement(todo) {
+        const li = document.createElement('li');
+        li.textContent = todo.todo;
+        li.className = todo.completed ? 'completed' : '';
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'button-container';
+
+        const updateButton = document.createElement('button');
+        updateButton.textContent = '✔️';
+        updateButton.addEventListener('click', () => toggleComplete(todo.id, li));
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '❌';
+        deleteButton.addEventListener('click', () => deleteTodo(todo.id, li));
+
+        buttonContainer.appendChild(updateButton);
+        buttonContainer.appendChild(deleteButton);
+        li.appendChild(buttonContainer);
+
+        return li;
+    }
+
+    async function toggleComplete(id, listItem) {
+        const isCompleted = listItem.classList.contains('completed');
+        const updatedTodo = await fetchFromEndPoint(`https://dummyjson.com/todos/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ completed: !isCompleted })
+        });
+
+        if (updatedTodo) {
+            listItem.classList.toggle('completed');
+            showPopup('Task Completed');
+        }
+    }
+
+    async function deleteTodo(id, listItem) {
+        const deletedTodo = await fetchFromEndPoint(`https://dummyjson.com/todos/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (deletedTodo) {
+            todos = todos.filter(todo => todo.id !== id);
+            listItem.remove();
+            showPopup('Task Deleted');
+        }
+    }
+
+    function showPopup(message) {
+        popup.textContent = message;
+        popup.style.visibility = 'visible';
+        popup.style.opacity = '1';
+
+        setTimeout(() => {
+            popup.style.opacity = '0';
+            popup.style.visibility = 'hidden';
+        }, 2000);
+    }
+});
+
+    </script>
+</body>
+</html>
